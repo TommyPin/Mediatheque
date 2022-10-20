@@ -5,32 +5,68 @@ import mediatheque.metier.Carte;
 import mediatheque.metier.Personne;
 import mediatheque.metier.Ressource;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
+import java.util.Scanner;
 
 public class ScenarioPersonne
 {
     public static void main(String[] args)
     {
-        //Déclaration et instanciation d'une personne.
-        Personne p1 = new Personne("PINAY", "Tommy");
-        // Attribution d'une identité à la personne.
-        p1.setPrenom("Tommy");
-        p1.setNom("Pi");
+        Personne p1 = null;
+        try
+        {
+            //Déclaration et instanciation d'une personne.
+            p1 = new Personne("PINAY", "Tommy");
+            // Attribution d'une identité à la personne.
+            p1.setNom("Pinay");
+            p1.setPrenom("Tommy");
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+
         p1.setDateNaissance(LocalDate.of(1993, 07, 03));
         p1.setDateNaissance(LocalDate.parse("1993-07-03"));
         p1.marcher();
 
         //Création d'une autre personne.
-        Personne p2 = new Personne("PONSONNET", "Matthieu", "1995-07-03");
+        Personne p2 = null;
+        try
+        {
+            p2 = new Personne("PONSONNET", "Matthieu", "1995-07-03");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
         System.out.println("L'année de naissance de p2 est : " + p2.getDateNaissance().getYear());
 
         // Création d'une ressource
         Ressource r1 = new Ressource("Tintin au Tibet");
         System.out.println("Mon livre s'appelle " + r1.getTitre() );
 
-        //Calcul du nombre d'années entre 2 dates
-        System.out.println(Personne.getNbAnnees(LocalDate.parse("1918-11-11"), LocalDate.now()));
+        boolean erreur = false;
+        do
+        {
+            try
+            {
+                //Calcul du nombre d'années entre 2 dates
+                System.out.println("Veuillez saisir la date de l'armistice 1918");
+                Scanner scanner = new Scanner (System.in);
+                String saisie = scanner.nextLine();
+                System.out.println(Personne.getNbAnnees(LocalDate.parse(saisie), LocalDate.now()));
+                erreur = false;
+            }
+            catch (DateTimeException dte)
+            {
+                System.out.println("Veuillez renseigner une date sous le format YYYY-MM-DD");
+                erreur = true;
+            }
+        }
+        while (erreur);
 
         // Afficher l'âge des personnes
         System.out.println( p1.getAge() );
@@ -47,7 +83,7 @@ public class ScenarioPersonne
         // Afficher le mois de naissance du propriétaire p1 de la carte
         System.out.println(carte1.getProprietaire().getDateNaissance().getMonth());
 
-        // Affichagede l'identifiant de la carte
+        // Affichage de l'identifiant de la carte
         System.out.println(carte1.getIdentifiant());
 
         // Création de 100 cartes

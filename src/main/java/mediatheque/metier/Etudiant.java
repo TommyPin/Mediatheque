@@ -14,8 +14,7 @@ public class Etudiant extends Adherent
         this.campus = campus;
     }
 
-    public Etudiant(String nom, String prenom, String dateNaissance, Universite campus)
-    {
+    public Etudiant(String nom, String prenom, String dateNaissance, Universite campus) throws Exception {
         super(nom, prenom, dateNaissance);
         setCampus(campus);
     }

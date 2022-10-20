@@ -14,16 +14,14 @@ public class Personne
     // Méthodes
 
     // Constructeur
-    public Personne (String nom, String prenom)
-    {
+    public Personne (String nom, String prenom) throws Exception {
         setNom(nom);
         setPrenom(prenom);
         // Création d'une carte et placement de celle-ci dans la poche de la personne
         setCarte(new Carte (this));
     }
 
-    public Personne (String nom, String prenom, String dateNaissance)
-    {
+    public Personne (String nom, String prenom, String dateNaissance) throws Exception {
         this (nom, prenom); // ==> setNom(nom); setPrenom(prenom);
         setDateNaissance(LocalDate.parse(dateNaissance));
     }
@@ -63,15 +61,15 @@ public class Personne
     }
 
     // Accesseurs en écriture
-    public void setNom(String nom)
-    {
+    public void setNom(String nom) throws Exception {
         if (nom.length() >= 3)
         {
             this.nom = nom;
         }
         else
         {
-            System.out.println("La proposition " + nom + " est invalide.");
+            // Jeter une exception permet de gérer des try catch associés lors de l'utilisation de cet accesseur
+            throw new Exception("La proposition " + nom + " est invalide.");
         }
     }
     public void setPrenom(String prenom)

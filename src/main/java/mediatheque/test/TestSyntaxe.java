@@ -1,4 +1,7 @@
 package mediatheque.test;
+import tommy.utils.Toolbox;
+
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Year;
 
@@ -25,7 +28,7 @@ public class TestSyntaxe
         return 2 * Math.PI * rayon;
     }
 
-    /**
+    /** Methode permettant de calculer le périmètre du cercle
      *
      * @param nom
      * Nom de famille de la personne à saluer
@@ -38,6 +41,10 @@ public class TestSyntaxe
         System.out.println("Bonjour " + ((genre == 1) ? "Monsieur " : "Madame ") + nom);
     }
 
+    /**
+     * Methode main
+     * @param args
+     */
     public static void main(String[] args)
     {
         // Déclarer et définir une variable (==> Espace mémoire dans laquel on va stocker une valeur primitive)
@@ -153,10 +160,19 @@ public class TestSyntaxe
         saluer();
 
         // Invocation de la méthode "calculerPerimetreCercle"
-        System.out.println(calculerPerimetreCercle(12));
+        System.out.println("le périmètre du cercle de rayon 12 est " + calculerPerimetreCercle(12));
 
         //Créer une procédure qui accepte une salutation avec le nom de la personne et son genre
         saluerPersonneGenre("Dupont", 1);
         saluerPersonneGenre("Durand", 2);
+
+        // Obtenir un nombre aléatoire entre deux nombres définis
+        int tirage = Toolbox.getRandomValue(64,227);
+        System.out.println("Valeur aléatoire " + tirage);
+
+        // Obtenir une date aléatoire entre deux dates définis
+        LocalDate dateAleatoire = Toolbox.getRandomLocalDate(1993, 1991);
+        System.out.println("La date aléatoire est " + dateAleatoire.toString());
+
     }
 }
